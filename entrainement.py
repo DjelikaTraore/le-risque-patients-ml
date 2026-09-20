@@ -1,12 +1,12 @@
 import pandas as pd #importation de la bibliothèque pandas pour la manipulation des données
 
-## Chargement des données 
+    ## Chargement des données 
 donnees = pd.read_csv('risque_patients.csv')
 
-#affichage des 5 premières lignes du DataFrame
+    #affichage des 5 premières lignes du DataFrame
 print(donnees.head())
 
-#les features (variables explicatives) sont toutes les colonnes 
+    #les features (variables explicatives) sont toutes les colonnes 
 X = donnees[['age' , 'tension' , 'cholesterol']]
 
 #la variable cible (variable à prédire) est la colonne 'risque'
@@ -28,12 +28,30 @@ print("modele entrainer !!")
 #####
 # test sur un patient
 import pandas as pd
-# Création d'un DataFrame pour un nouveau patient avec les mêmes colonnes que le DataFrame d'origine
-# nouveau_patient = pd.DataFrame({'age': [55], 'tension': [140], 'cholesterol': [220]})
-# print("Prédiction du risque pour le nouveau patient :", modele.predict(nouveau_patient))
-# probabilite_risque = modele.predict_proba(nouveau_patient)
-# print("Probabilité de risque pour le nouveau patient :", probabilite_risque)
-###
+    # Création d'un DataFrame pour un nouveau patient avec les mêmes colonnes que le DataFrame d'origine
+    # nouveau_patient = pd.DataFrame({'age': [55], 'tension': [140], 'cholesterol': [220]})
+    # print("Prédiction du risque pour le nouveau patient :", modele.predict(nouveau_patient))
+    # probabilite_risque = modele.predict_proba(nouveau_patient)
+    # print("Probabilité de risque pour le nouveau patient :", probabilite_risque)
+    ###
+
+
+# Evaluation du taux d'entraînement du modèle 
+from sklearn.model_selection import train_test_split
+# Séparation des données en ensembles d'entraînement et de test
+# x_train  va contenir 80% des données pour l'entraînement et x_test contiendra 20% des données pour le test
+# y_train va contenir les étiquettes correspondantes pour l'ensemble d'entraînement et y_test contiendra les étiquettes pour l'ensemble de test
+# random_state=42 est utilisé pour garantir que la séparation des données est reproductible
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+modele.fit(X_train, y_train) # Entraînement du modèle sur l'ensemble d'entraînement
+print("Le modèle a été réentraîné sur l'ensemble d'entraînement.")
+score = modele.score(X_test, y_test) # Évaluation du modèle sur l'ensemble de test
+print("Taux de réussite du modèle :", score)
+
+
+
 # Test interactif pour un patient
 age = int(input("Entrez l'âge du patient : "))
 while age < 0 or age > 120:
