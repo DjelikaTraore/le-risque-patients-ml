@@ -34,3 +34,28 @@ import pandas as pd
 # probabilite_risque = modele.predict_proba(nouveau_patient)
 # print("Probabilité de risque pour le nouveau patient :", probabilite_risque)
 ###
+# Test interactif pour un patient
+age = int(input("Entrez l'âge du patient : "))
+while age < 0 or age > 120:
+    print("Veuillez entrer un âge valide (entre 0 et 120).")
+    age = int(input("Entrez l'âge du patient : "))
+    
+tension = int(input("Entrez la tension du patient : "))
+while tension < 80 or tension > 220:
+    print("Veuillez entrer une tension valide (entre 80 et 220).")
+    tension = int(input("Entrez la tension du patient : "))
+
+cholesterol = int(input("Entrez le cholestérol du patient : "))
+while cholesterol < 100 or cholesterol > 400:
+    print("Veuillez entrer un cholestérol valide (entre 100 et 400).")
+    cholesterol = int(input("Entrez le cholestérol du patient : "))
+    
+# Création d'un DataFrame pour le patient avec les mêmes colonnes que le DataFrame  
+nouveau_patient = pd.DataFrame({'age': [age], 'tension': [tension], 'cholesterol': [cholesterol]})
+# Prédiction du risque pour le patient
+prediction = modele.predict(nouveau_patient)
+# Affichage de la prédiction
+if prediction[0] == 1:
+    print("Le patient est à risque.")
+else:
+    print("Le patient n'est pas à risque.")
