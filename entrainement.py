@@ -24,6 +24,11 @@ modele = LogisticRegression()
 # entrainement de modele sur les donnees du csv
 modele.fit(X, y)
 
+import joblib #importation de la bibliothèque joblib pour la sérialisation des objets Python
+# sauvegarde du modele entrainer dans un fichier .pkl
+joblib.dump(modele, 'modele_risque.pkl') #sauvegarde du modèle entraîné dans un fichier .pkl
+print("Le modèle a été sauvegardé dans le fichier modele_risque.pkl.")
+
 print("modele entrainer !!")
 #####
 # test sur un patient
